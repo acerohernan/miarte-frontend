@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.icon {
+  @apply w-6 h-6 sm:w-7 sm:h-7;
+}
+
+.layout {
+  @apply max-w-7xl mx-auto;
+}
+
+.input {
+  @apply bg-gray-50/20 border border-gray-100 text-gray-900 text-sm outline-none rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
+}
+
+.label {
+  @apply block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300;
+}
+
+.button {
+  @apply focus:outline-none text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5;
+}
