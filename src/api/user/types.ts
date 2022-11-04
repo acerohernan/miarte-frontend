@@ -10,3 +10,17 @@ export interface LoginFormValues {
   password: string;
   remember_me: boolean;
 }
+
+export interface ForgotPasswordFormValues {
+  email: string;
+}
+
+export interface VerifyForgotPasswordCodeFormValues {
+  code: string;
+}
+
+export interface RestorePasswordFormValues {
+  code: string;
+  password: string;
+  re_password: string;
+}

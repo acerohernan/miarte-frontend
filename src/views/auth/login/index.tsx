@@ -84,6 +84,17 @@ const LoginView = () => {
         <Button loading={false} submit>
           Ingresa
         </Button>
+
+        <span className="text-sm text-center block mt-6">
+          ¿Olvidaste tu contraseña?{" "}
+          <Link
+            href="/forgot-password"
+            className="text-blue-500 hover:underline"
+          >
+            Recupérala
+          </Link>
+        </span>
+
         <span className="text-sm text-center block mt-4">
           ¿No tienes una cuenta?{" "}
           <Link href="/signup" className="text-blue-500 hover:underline">

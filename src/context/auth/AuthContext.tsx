@@ -1,7 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { API } from "../../api";
-import { LoginFormValues, SignUpFormValues } from "../../api/user/types";
+import {
+  ForgotPasswordFormValues,
+  LoginFormValues,
+  RestorePasswordFormValues,
+  SignUpFormValues,
+  VerifyForgotPasswordCodeFormValues,
+} from "../../api/user/types";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useToast } from "../../utils/toast";
 import { IAuthContext } from "./types";
@@ -26,7 +32,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       push("/login");
       toast.success("Registrado correctamente");
     } catch (error: any) {
-      toast.error(error.response!.data!.error! || "Error de servidor");
+      toast.error(error.response?.data?.error || "Error de servidor");
     } finally {
       setLoading(false);
     }
@@ -42,7 +48,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       if (error.response!.status! === 401) {
         toast.error("La contraseña o el correo electrónico  son inválidos");
       } else {
-        toast.error(error.response!.data!.error! || "Error de servidor");
+        toast.error(error.response?.data?.error || "Error de servidor");
       }
     } finally {
       setLoading(false);
@@ -53,7 +59,53 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setToken("");
   }
 
-  const actions = { signUp, login, logout };
+  async function forgotPassword(data: ForgotPasswordFormValues): Promise<void> {
+    setLoading(true);
+    try {
+      const response = await API.user.forgotPassword(data);
+      console.log(response.data);
+    } catch (error: any) {
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function verifyForgotPasswordCode(
+    data: VerifyForgotPasswordCodeFormValues
+  ): Promise<{ valid: boolean }> {
+    setLoading(true);
+    try {
+      await API.user.verifyForgotPasswordCode(data);
+      return { valid: true };
+    } catch (error: any) {
+      return { valid: false };
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function restorePassword(
+    data: RestorePasswordFormValues
+  ): Promise<void> {
+    setLoading(true);
+    try {
+      await API.user.restorePassword(data);
+      toast.success("Contraseña restablecida exitosamente");
+    } catch (error: any) {
+      toast.error(error.response?.data?.error || "Error de servidor");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const actions = {
+    signUp,
+    login,
+    logout,
+    forgotPassword,
+    verifyForgotPasswordCode,
+    restorePassword,
+  };
   const state = { loading, token };
 
   return (

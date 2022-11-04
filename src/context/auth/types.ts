@@ -1,4 +1,10 @@
-import { LoginFormValues, SignUpFormValues } from "../../api/user/types";
+import {
+  ForgotPasswordFormValues,
+  LoginFormValues,
+  RestorePasswordFormValues,
+  SignUpFormValues,
+  VerifyForgotPasswordCodeFormValues,
+} from "../../api/user/types";
 
 export interface IAuthState {
   loading: boolean;
@@ -9,6 +15,11 @@ export interface IAuthActions {
   signUp: (data: SignUpFormValues) => Promise<void>;
   login: (data: LoginFormValues) => Promise<void>;
   logout: () => void;
+  forgotPassword: (data: ForgotPasswordFormValues) => Promise<void>;
+  verifyForgotPasswordCode: (
+    data: VerifyForgotPasswordCodeFormValues
+  ) => Promise<{ valid: boolean }>;
+  restorePassword: (data: RestorePasswordFormValues) => Promise<void>;
 }
 
 export interface IAuthContext {
