@@ -9,6 +9,7 @@ import {
 export interface IAuthState {
   loading: boolean;
   token: string;
+  user: any;
 }
 
 export interface IAuthActions {
@@ -20,6 +21,7 @@ export interface IAuthActions {
     data: VerifyForgotPasswordCodeFormValues
   ) => Promise<{ valid: boolean }>;
   restorePassword: (data: RestorePasswordFormValues) => Promise<void>;
+  getInformation: () => Promise<void>;
 }
 
 export interface IAuthContext {

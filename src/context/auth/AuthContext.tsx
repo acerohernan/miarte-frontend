@@ -20,6 +20,7 @@ interface Props {
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<{} | null>(null);
   const { value: token, setValue: setToken } = useLocalStorage("token");
 
   const { push } = useRouter();
@@ -63,7 +64,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setLoading(true);
     try {
       const response = await API.user.forgotPassword(data);
-      console.log(response.data);
+      setUser(response.data?.user);
     } catch (error: any) {
     } finally {
       setLoading(false);
@@ -98,6 +99,21 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     }
   }
 
+  async function getInformation() {
+    setLoading(true);
+    try {
+      const response = await API.user.getInformation();
+      console.log(response.data);
+    } catch (error) {
+      toast.error(
+        "Error al obtener la inforamción del usuario, porfavor inicia sessión de nuevo"
+      );
+      setToken("");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const actions = {
     signUp,
     login,
@@ -105,8 +121,9 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     forgotPassword,
     verifyForgotPasswordCode,
     restorePassword,
+    getInformation,
   };
-  const state = { loading, token };
+  const state = { loading, token, user };
 
   return (
     <AuthContext.Provider value={{ state, actions }}>

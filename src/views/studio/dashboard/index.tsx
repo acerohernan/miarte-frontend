@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { useEffect } from "react";
 import { FiUpload } from "react-icons/fi";
+import { useAuthContext } from "../../../context/hooks";
 import StepsCard, { StepsCardProperties } from "./components/stepsCard";
 
 const stepsCardData: Array<StepsCardProperties> = [
@@ -70,6 +72,15 @@ const stepsCardData: Array<StepsCardProperties> = [
 ];
 
 const DashboardView = () => {
+  const {
+    actions: { getInformation },
+    state: { user },
+  } = useAuthContext();
+
+  useEffect(() => {
+    if (!user) getInformation();
+  }, []);
+
   return (
     <div className="layout">
       <div className="flex items-center justify-between">
@@ -87,23 +98,31 @@ const DashboardView = () => {
           Vamos a dejar tu tienda hecha un pincel
         </span>
         <div className="gap-4 grid mt-4 md:grid-cols-2 lg:grid-cols-3">
-          {stepsCardData.map((card) => (
+          {stepsCardData.map((card, i) => (
             <StepsCard
               title={card.title}
               description={card.description}
               steps={card.steps}
               iconPath={card.iconPath}
+              key={i}
             />
           ))}
         </div>
       </div>
-      <p className="paragraph mt-2">
-        Cuando hayas completado estos pasos tu tienda estará lista.
-      </p>
-      <section className="mt-10">
-        <h1 className="h1">Consejos para nuevos artistas</h1>
-        <div></div>
-      </section>
+      <div className="md:flex items-center mt-5 justify-between">
+        <p className="paragraph">
+          Cuando hayas completado estos pasos tu tienda estará lista.
+        </p>
+        <div>
+          <span className="paragraph">¿Ya controlas?</span>
+          <button
+            className="paragraph font-medium ml-1 hover:underline"
+            onClick={() => {}}
+          >
+            Oculta la guía
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

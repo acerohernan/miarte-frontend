@@ -15,7 +15,7 @@ const headers = () => ({
 const authenticatedHeaders = () => ({
   "Content-Type": "application/json",
   Accept: "application/json",
-  Authorization: String(localStorage.getItem("token")),
+  Authorization: `Bearer ${String(localStorage.getItem("token"))}`,
 });
 
 export const signUp = (data: SignUpFormValues) =>

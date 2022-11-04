@@ -25,10 +25,11 @@ const StepsCard: React.FC<StepsCardProperties> = ({
       <h3 className="h3 font-medium mt-3">{title}</h3>
       <p className="paragraph mt-2 font-light">{description}</p>
       <div className="mt-6">
-        {steps.map((step) => (
+        {steps.map((step, i) => (
           <Link
             href={step.link}
-            className="flex items-center justify-start px-4 py-2 mt-3"
+            className="flex items-center justify-start px-4 py-1 mt-3"
+            key={i}
           >
             <FiChevronRight className="mx-2 text-gray-500" />
             <span className="paragraph hover:underline font-medium">

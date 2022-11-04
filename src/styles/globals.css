@@ -7,7 +7,7 @@
 }
 
 .layout {
-  @apply max-w-7xl mx-auto px-7 my-5;
+  @apply max-w-7xl mx-auto px-7 my-5 min-h-[75vh];
 }
 
 .input {
