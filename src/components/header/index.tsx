@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <div className="border-b border-gray-200">
-      <div className="flex items-center justify-between px-5 py-3 layout mx-auto">
+      <div className="flex items-center justify-between px-5 py-3 max-w-7xl mx-auto">
         <div className="flex items-center">
           <button className="link">
             <FiMenu className="icon" />

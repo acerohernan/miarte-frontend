@@ -30,9 +30,7 @@ const SingUpView = () => {
 
   return (
     <div className="layout p-5 my-10">
-      <h1 className="block text-center mb-10 font-normal text-2xl">
-        Únete a RedBubble
-      </h1>
+      <h1 className="block text-center mb-10 h1">Únete a RedBubble</h1>
       <form className="max-w-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-2  relative">
           <button

@@ -22,9 +22,7 @@ const LoginView = () => {
 
   return (
     <div className="layout p-5 my-10">
-      <h1 className="block text-center mb-10 font-normal text-2xl">
-        Ingresa a tu cuenta
-      </h1>
+      <h1 className="block text-center mb-10 h1">Ingresa a tu cuenta</h1>
       <form className="max-w-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="my-8" />
         <label htmlFor="email" className="label">
@@ -69,7 +67,7 @@ const LoginView = () => {
               id="default-checkbox"
               type="checkbox"
               className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 cursor-pointer"
-              defaultChecked={false}
+              defaultChecked={true}
               {...register("remember_me")}
             />
             <label

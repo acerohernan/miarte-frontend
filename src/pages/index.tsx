@@ -4,7 +4,7 @@ import PrivateRoute from "../components/routes/private";
 const Home: NextPage = () => {
   return (
     <PrivateRoute>
-      <div className="border-2">
+      <div className="layout">
         <h1>This is the home</h1>
       </div>
     </PrivateRoute>

@@ -15,7 +15,7 @@ const PublicRoute: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     if (Boolean(token)) {
-      push("/");
+      push("/studio/dashboard");
     }
   }, [token]);
 

@@ -45,7 +45,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       setToken(String(response.data.token));
       toast.success(`Iniciaste sessión correctamente`);
     } catch (error: any) {
-      if (error.response!.status! === 401) {
+      if (error.response?.status === 401) {
         toast.error("La contraseña o el correo electrónico  son inválidos");
       } else {
         toast.error(error.response?.data?.error || "Error de servidor");

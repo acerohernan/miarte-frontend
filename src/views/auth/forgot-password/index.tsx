@@ -27,9 +27,7 @@ const ForgotPasswordView = () => {
 
   return (
     <div className="layout p-5 my-10">
-      <h1 className="block text-center mb-10 font-normal text-2xl">
-        Recupera tu contraseña
-      </h1>
+      <h1 className="block text-center mb-10 h1">Recupera tu contraseña</h1>
       {!sended ? (
         <form className="max-w-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-8" />
