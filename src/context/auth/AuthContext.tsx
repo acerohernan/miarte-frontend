@@ -10,7 +10,7 @@ import {
 } from "../../api/user/types";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useToast } from "../../utils/toast";
-import { IAuthContext } from "./types";
+import { IAuthActions, IAuthContext, IAuthState, IUser } from "./types";
 
 const AuthContext = React.createContext({} as IAuthContext);
 
@@ -20,7 +20,7 @@ interface Props {
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState<{} | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const { value: token, setValue: setToken } = useLocalStorage("token");
 
   const { push } = useRouter();
@@ -99,22 +99,38 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     }
   }
 
-  async function getInformation() {
+  async function getInformation(): Promise<IUser | null> {
     setLoading(true);
     try {
       const response = await API.user.getInformation();
-      console.log(response.data);
+      setUser(response.data.user as IUser);
+      return response.data.user;
     } catch (error) {
       toast.error(
-        "Error al obtener la inforamción del usuario, porfavor inicia sessión de nuevo"
+        "Error al obtener la información del usuario, porfavor inicia sessión de nuevo"
       );
       setToken("");
+      return null;
     } finally {
       setLoading(false);
     }
   }
 
-  const actions = {
+  async function getSteps() {
+    setLoading(true);
+    try {
+      const response = await API.user.getSteps();
+      console.log(response.data);
+    } catch (error) {
+      toast.error(
+        "Error al obtener los logros del usuario, porfavor inicia sessión de nuevo"
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const actions: IAuthActions = {
     signUp,
     login,
     logout,
@@ -122,8 +138,9 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     verifyForgotPasswordCode,
     restorePassword,
     getInformation,
+    getSteps,
   };
-  const state = { loading, token, user };
+  const state: IAuthState = { loading, token, user };
 
   return (
     <AuthContext.Provider value={{ state, actions }}>

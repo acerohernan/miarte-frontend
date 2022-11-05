@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { useEffect } from "react";
 import { FiUpload } from "react-icons/fi";
-import { useAuthContext } from "../../../context/hooks";
 import StepsCard, { StepsCardProperties } from "./components/stepsCard";
 
 const stepsCardData: Array<StepsCardProperties> = [
@@ -72,15 +70,6 @@ const stepsCardData: Array<StepsCardProperties> = [
 ];
 
 const DashboardView = () => {
-  const {
-    actions: { getInformation },
-    state: { user },
-  } = useAuthContext();
-
-  useEffect(() => {
-    if (!user) getInformation();
-  }, []);
-
   return (
     <div className="layout">
       <div className="flex items-center justify-between">
